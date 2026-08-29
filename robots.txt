@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /portal-login.html
+Disallow: /dashboard.html
+Disallow: /admin.html
+
+Sitemap: https://unitytech.io/sitemap.xml

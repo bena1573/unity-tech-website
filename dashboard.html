@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Dashboard — Unity Tech</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="assets/logo/unity-tech-icon.jpg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="dashboard">
+
+<div id="spotlight"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div class="demo-banner">⚠ Demo prototype with sample data — not connected to a real backend, database, or account system.</div>
+
+<div class="portal-shell">
+  <aside class="portal-sidebar">
+    <div class="logo"><span class="logo-badge"><img src="assets/logo/unity-tech-logo.jpg" alt="Unity Tech"></span></div>
+    <nav class="portal-nav">
+      <button class="portal-nav-item active" data-tab="overview"><span class="ic">◆</span> Dashboard</button>
+      <button class="portal-nav-item" data-tab="projects"><span class="ic">▣</span> Projects</button>
+      <button class="portal-nav-item" data-tab="invoices"><span class="ic">▤</span> Invoices</button>
+      <button class="portal-nav-item" data-tab="messages"><span class="ic">✉</span> Messages</button>
+      <button class="portal-nav-item" data-tab="files"><span class="ic">🗂</span> Files</button>
+      <button class="portal-nav-item" data-tab="progress"><span class="ic">📈</span> Progress</button>
+      <button class="portal-nav-item" data-tab="notifications"><span class="ic">🔔</span> Notifications</button>
+      <button class="portal-nav-item" data-tab="profile"><span class="ic">⚙</span> Profile &amp; Settings</button>
+    </nav>
+    <a href="index.html" class="portal-exit">← Exit to website</a>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <h1>Welcome back, Alex</h1>
+      <a href="contact.html" class="btn btn-ghost" style="font-size:.82rem; padding:.6rem 1.2rem;">Contact your team</a>
+    </div>
+
+    <!-- Overview -->
+    <section class="portal-tab active" id="tab-overview">
+      <div class="portal-grid">
+        <div class="portal-card"><div class="k-icon">▣</div><div class="k-num">3</div><div class="k-label">Active projects</div></div>
+        <div class="portal-card"><div class="k-icon">▤</div><div class="k-num">Birr 6,999</div><div class="k-label">Next invoice due</div></div>
+        <div class="portal-card"><div class="k-icon">✉</div><div class="k-num">4</div><div class="k-label">Unread messages</div></div>
+        <div class="portal-card"><div class="k-icon">📈</div><div class="k-num">72%</div><div class="k-label">Avg. project progress</div></div>
+      </div>
+      <div class="portal-section">
+        <h3>Your projects</h3>
+        <table class="portal-table">
+          <thead><tr><th>Project</th><th>Type</th><th>Status</th><th>Progress</th><th>Due</th></tr></thead>
+          <tbody>
+            <tr><td>Website Redesign</td><td>Web Development</td><td><span class="badge badge-blue">In Progress</span></td><td style="width:140px;"><div class="progress-track"><div class="progress-fill" style="width:80%;"></div></div></td><td>Aug 20, 2026</td></tr>
+            <tr><td>Mobile App v2</td><td>Mobile App</td><td><span class="badge badge-yellow">In Review</span></td><td style="width:140px;"><div class="progress-track"><div class="progress-fill" style="width:55%;"></div></div></td><td>Sep 5, 2026</td></tr>
+            <tr><td>Brand Refresh</td><td>Branding</td><td><span class="badge badge-green">Completed</span></td><td style="width:140px;"><div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div></td><td>Jul 12, 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="portal-tab" id="tab-projects">
+      <div class="portal-section">
+        <h3>All projects</h3>
+        <table class="portal-table">
+          <thead><tr><th>Project</th><th>Type</th><th>Status</th><th>Started</th><th>Due</th></tr></thead>
+          <tbody>
+            <tr><td>Website Redesign</td><td>Web Development</td><td><span class="badge badge-blue">In Progress</span></td><td>Jun 1, 2026</td><td>Aug 20, 2026</td></tr>
+            <tr><td>Mobile App v2</td><td>Mobile App</td><td><span class="badge badge-yellow">In Review</span></td><td>May 10, 2026</td><td>Sep 5, 2026</td></tr>
+            <tr><td>Brand Refresh</td><td>Branding</td><td><span class="badge badge-green">Completed</span></td><td>Apr 2, 2026</td><td>Jul 12, 2026</td></tr>
+            <tr><td>SEO Optimization</td><td>Marketing</td><td><span class="badge badge-blue">In Progress</span></td><td>Jul 1, 2026</td><td>Oct 1, 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Invoices -->
+    <section class="portal-tab" id="tab-invoices">
+      <div class="portal-section">
+        <h3>Invoices &amp; payments</h3>
+        <table class="portal-table">
+          <thead><tr><th>Invoice</th><th>Project</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody>
+            <tr><td>#UT-1042</td><td>Website Redesign</td><td>Birr 6,999</td><td><span class="badge badge-yellow">Due Aug 20</span></td><td>—</td></tr>
+            <tr><td>#UT-1038</td><td>Mobile App v2</td><td>Birr 9,999</td><td><span class="badge badge-green">Paid</span></td><td>Jul 10, 2026</td></tr>
+            <tr><td>#UT-1029</td><td>Brand Refresh</td><td>Birr 2,500</td><td><span class="badge badge-green">Paid</span></td><td>Apr 5, 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Messages -->
+    <section class="portal-tab" id="tab-messages">
+      <div class="portal-section">
+        <h3>Messages</h3>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">Sara Nasser</strong><p class="muted" style="font-size:.85rem;">Sent over the new homepage mockups for review — let us know what you think!</p></div></div>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">David Tran</strong><p class="muted" style="font-size:.85rem;">Staging link is live for the mobile app build. Testing checklist attached.</p></div></div>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">Amir Khalil</strong><p class="muted" style="font-size:.85rem;">Quick call this week to align on the SEO roadmap?</p></div></div>
+      </div>
+    </section>
+
+    <!-- Files -->
+    <section class="portal-tab" id="tab-files">
+      <div class="portal-section">
+        <h3>Shared files</h3>
+        <div class="file-row"><span>homepage-mockup-v3.fig</span><span class="muted">2.4 MB</span></div>
+        <div class="file-row"><span>brand-guidelines.pdf</span><span class="muted">6.1 MB</span></div>
+        <div class="file-row"><span>mobile-app-build.apk</span><span class="muted">18.2 MB</span></div>
+        <div class="file-row"><span>seo-audit-report.pdf</span><span class="muted">1.1 MB</span></div>
+      </div>
+    </section>
+
+    <!-- Progress -->
+    <section class="portal-tab" id="tab-progress">
+      <div class="portal-section">
+        <h3>Project progress</h3>
+        <div class="bar-chart">
+          <div class="bar" style="height:80%;"><span>Website</span></div>
+          <div class="bar" style="height:55%;"><span>Mobile App</span></div>
+          <div class="bar" style="height:100%;"><span>Branding</span></div>
+          <div class="bar" style="height:35%;"><span>SEO</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notifications -->
+    <section class="portal-tab" id="tab-notifications">
+      <div class="portal-section">
+        <h3>Notifications</h3>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">Invoice #UT-1042 is due in 5 days</strong><p class="muted" style="font-size:.85rem;">Aug 15, 2026</p></div></div>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">New file shared: mobile-app-build.apk</strong><p class="muted" style="font-size:.85rem;">Aug 10, 2026</p></div></div>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">Brand Refresh marked as completed</strong><p class="muted" style="font-size:.85rem;">Jul 12, 2026</p></div></div>
+      </div>
+    </section>
+
+    <!-- Profile -->
+    <section class="portal-tab" id="tab-profile">
+      <div class="portal-section" style="max-width:480px;">
+        <h3>Profile &amp; settings</h3>
+        <div class="field" style="margin-bottom:1rem;"><input type="text" value="Alex Morgan"></div>
+        <div class="field" style="margin-bottom:1rem;"><input type="email" value="alex@clientcompany.com"></div>
+        <div class="field" style="margin-bottom:1.2rem;"><input type="text" value="Client Company Inc."></div>
+        <button class="btn btn-primary" type="button">Save changes</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/app.js" defer></script>
+<script>
+  (function(){
+    const tabs = document.querySelectorAll('.portal-nav-item');
+    const panels = document.querySelectorAll('.portal-tab');
+    tabs.forEach(tab=>{
+      tab.addEventListener('click', ()=>{
+        tabs.forEach(t=>t.classList.remove('active'));
+        panels.forEach(p=>p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

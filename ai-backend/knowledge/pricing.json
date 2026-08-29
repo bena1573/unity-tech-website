@@ -1,0 +1,37 @@
+{
+  "web_development_plans": [
+    { "name": "Starter", "price_birr": 20000, "billing": "per month", "features": ["Basic Website Development", "5 Page Design", "Mobile Responsive", "Basic SEO Setup", "1 Month Support"] },
+    { "name": "Professional", "price_birr": 50000, "billing": "per month", "popular": true, "features": ["Custom Web Application", "Up to 10 Pages", "Advanced UI/UX Design", "Marketing strategy", "Social media marketing", "24/7 support"] },
+    { "name": "Enterprise", "price_birr": 70000, "billing": "per month", "features": ["Full-stack Development", "Unlimited pages", "API Integration", "Unique Marketing strategy", "Branding & Social media marketing", "24/7 support"] }
+  ],
+  "custom_builder_catalog": {
+    "website_development": [
+      { "name": "Landing Page", "price_birr": 20000 },
+      { "name": "Business Website", "price_birr": 35000 },
+      { "name": "E-Commerce", "price_birr": 130000 },
+      { "name": "Mobile App", "price_birr": 150000 },
+      { "name": "Dashboard", "price_birr": 20000 },
+      { "name": "AI Integration", "price_birr": 100000 }
+    ],
+    "graphic_design": [
+      { "name": "Logo Design", "price_birr": 1500 },
+      { "name": "Brand Identity", "price_birr": 3000 },
+      { "name": "Social Media Design", "price_birr": 500, "per_item": true },
+      { "name": "Poster Design", "price_birr": 800 }
+    ],
+    "video_editing": [
+      { "name": "Short Form Video", "price_birr": 500, "per_item": true },
+      { "name": "Long Form Video", "price_birr": 1500 },
+      { "name": "YouTube Editing", "price_birr_range": [700, 2000], "per_item": true },
+      { "name": "Color Grading", "price_birr_range": [1000, 2000] },
+      { "name": "Motion Graphics", "price_birr": 5000 },
+      { "name": "3D Animation", "price_birr": 10000 }
+    ],
+    "delivery_speed_multipliers": { "normal": 1.0, "fast": 1.25, "express": 1.6 },
+    "delivery_speed_days": { "normal": "2-3 weeks", "fast": "1 week", "express": "48-72 hours" },
+    "support_addons_birr": { "basic": 0, "priority": 600, "dedicated_manager": 1500 },
+    "revision_addons_birr": { "2_revisions": 0, "5_revisions": 400, "unlimited": 900 }
+  },
+  "currency": "Birr (ETB)",
+  "note": "All prices are starting points and can vary based on project scope. YouTube Editing and Color Grading are priced as ranges depending on complexity - the online price builder uses the lower end of the range as a starting estimate. The custom price builder on the Pricing page gives an instant estimate for a tailored package. There is no longer a separate Video Editing & Graphics Design plan table - those services are only available through the custom price builder."
+}

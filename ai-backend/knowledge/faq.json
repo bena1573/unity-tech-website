@@ -1,0 +1,10 @@
+[
+  { "question": "How long does a typical project take?", "answer": "Most web projects ship in 4-8 weeks; mobile apps and AI products typically run 8-14 weeks depending on scope." },
+  { "question": "Do you work with early-stage startups?", "answer": "Yes — roughly half our clients are pre-seed to Series A. We scope tightly so you ship an MVP without overbuilding." },
+  { "question": "What does support after launch look like?", "answer": "Every project includes a support window post-launch, and ongoing retainers are available for teams who want a long-term partner." },
+  { "question": "Can you take over an existing codebase?", "answer": "Yes. We start with a technical audit so you know exactly what you're inheriting before we touch a line of code." },
+  { "question": "How quickly will I hear back after contacting you?", "answer": "We reply to every inquiry within one business day, usually much sooner." },
+  { "question": "Do you work with clients outside your time zone?", "answer": "Yes — we're a remote-first team and work with clients across every major time zone, with overlap hours scheduled for each project." },
+  { "question": "What happens after I submit the contact form?", "answer": "We review your project details and reply with either a few clarifying questions or a proposed next step, usually a short call." },
+  { "question": "Can I request a custom quote?", "answer": "Yes — use the custom price builder on the Pricing page to put together your own package and get an instant estimate, or ask this assistant to build one with you." }
+]

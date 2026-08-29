@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Login — Unity Tech</title>
+<meta name="description" content="Unity Tech client and admin portal login (demo prototype).">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="assets/logo/unity-tech-icon.jpg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="portal-login">
+
+<div id="techIconsBg" aria-hidden="true"></div>
+<div id="spotlight"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div class="demo-banner">⚠ Demo prototype — this login is not connected to a real backend. Any email/password will work, and no data is stored securely.</div>
+
+<div class="portal-login-wrap">
+  <div class="portal-login-card">
+    <div class="logo" style="justify-content:center; margin-bottom:1.6rem;">
+      <span class="logo-badge"><img src="assets/logo/unity-tech-logo.jpg" alt="Unity Tech"></span>
+    </div>
+    <div class="portal-toggle" role="tablist" aria-label="Portal type">
+      <button type="button" class="active" id="tabClient" role="tab" aria-selected="true">Client Portal</button>
+      <button type="button" id="tabAdmin" role="tab" aria-selected="false">Admin Panel</button>
+    </div>
+
+    <form id="portalLoginForm">
+      <div class="field" style="margin-bottom:1rem;"><input type="email" placeholder="Email address" required></div>
+      <div class="field" style="margin-bottom:1.4rem;"><input type="password" placeholder="Password" required></div>
+      <button type="submit" class="btn btn-primary magnetic" style="width:100%; justify-content:center;" id="portalSubmit">Sign in to Client Portal →</button>
+    </form>
+    <p class="muted" style="text-align:center; font-size:.82rem; margin-top:1.2rem;">This is a UI demo — no account is created or verified.</p>
+    <a href="index.html" class="muted" style="display:block; text-align:center; font-size:.82rem; margin-top:1rem;">← Back to website</a>
+  </div>
+</div>
+
+<script src="js/app.js" defer></script>
+<script>
+  (function(){
+    const tabClient = document.getElementById('tabClient');
+    const tabAdmin = document.getElementById('tabAdmin');
+    const submitBtn = document.getElementById('portalSubmit');
+    let mode = 'client';
+    function setMode(m){
+      mode = m;
+      tabClient.classList.toggle('active', m === 'client');
+      tabAdmin.classList.toggle('active', m === 'admin');
+      tabClient.setAttribute('aria-selected', m === 'client');
+      tabAdmin.setAttribute('aria-selected', m === 'admin');
+      submitBtn.textContent = m === 'client' ? 'Sign in to Client Portal →' : 'Sign in to Admin Panel →';
+    }
+    tabClient.addEventListener('click', ()=> setMode('client'));
+    tabAdmin.addEventListener('click', ()=> setMode('admin'));
+    document.getElementById('portalLoginForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      sessionStorage.setItem('unityTechDemoRole', mode);
+      window.location.href = mode === 'client' ? 'dashboard.html' : 'admin.html';
+    });
+  })();
+</script>
+</body>
+</html>

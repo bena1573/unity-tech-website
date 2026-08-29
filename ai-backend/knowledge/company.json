@@ -1,0 +1,35 @@
+{
+  "name": "Unity Tech",
+  "tagline": "Design. Develop. Deliver.",
+  "description": "Unity Tech is a senior, remote-first software agency that partners with founders and growing businesses to design, develop, and deliver premium web, mobile, AI, and brand products.",
+  "founded": "2023",
+  "stats": {
+    "projects_completed": "100+",
+    "clients": "50+",
+    "years_experience": "5+",
+    "client_satisfaction": "99%"
+  },
+  "mission": "To give ambitious businesses the same quality of software and design that only the biggest tech companies used to be able to afford.",
+  "vision": "A world where every founder with a great idea can get a world-class digital product built without compromise — on quality or on speed.",
+  "values": ["Craft over shortcuts", "Honest communication over vague promises", "Long-term partnership over one-off projects"],
+  "why_choose_us": [
+    "Senior-only team — no juniors learning on your dime",
+    "Radical transparency — weekly updates and honest timelines",
+    "Built to scale — architected for 10x growth, not just a demo",
+    "Long-term partnership — most clients stay well past launch"
+  ],
+  "team": [
+    { "name": "Amir Khalil", "role": "Founder & Creative Director" },
+    { "name": "Sara Nasser", "role": "Lead Product Designer" },
+    { "name": "David Tran", "role": "Engineering Lead" },
+    { "name": "Lena Moreau", "role": "AI & Automation Lead" }
+  ],
+  "contact": {
+    "email": "hello@unitytech.io",
+    "phone": "+1 (555) 010-2024",
+    "whatsapp": "https://wa.me/15550102024",
+    "location": "Remote-first, serving clients globally",
+    "hours": { "mon_fri": "9:00 AM – 6:00 PM", "saturday": "10:00 AM – 2:00 PM", "sunday": "Closed" }
+  },
+  "response_time": "We reply to every inquiry within one business day, usually much sooner."
+}

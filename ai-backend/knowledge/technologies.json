@@ -1,0 +1,18 @@
+{
+  "technologies": [
+    { "name": "React", "category": "Frontend", "use_case": "Building fast, interactive user interfaces for web apps." },
+    { "name": "Next.js", "category": "Frontend/Full-stack", "use_case": "Production-grade React apps with server rendering and great SEO." },
+    { "name": "TypeScript", "category": "Language", "use_case": "Type-safe JavaScript for fewer bugs in larger codebases." },
+    { "name": "Node.js", "category": "Backend", "use_case": "Fast, scalable backend APIs and services." },
+    { "name": "PostgreSQL", "category": "Database", "use_case": "Reliable relational database for structured business data." },
+    { "name": "Firebase", "category": "Backend-as-a-Service", "use_case": "Rapid mobile/web backends with auth, real-time data, and push notifications." },
+    { "name": "React Native", "category": "Mobile", "use_case": "Native iOS and Android apps from a single codebase." },
+    { "name": "Python", "category": "Language", "use_case": "AI/ML development, automation, and data pipelines." },
+    { "name": "PyTorch", "category": "AI/ML", "use_case": "Training and fine-tuning custom machine learning models." },
+    { "name": "OpenAI API / LangChain", "category": "AI", "use_case": "Building LLM-powered chatbots, copilots, and RAG systems." },
+    { "name": "AWS", "category": "Cloud", "use_case": "Scalable, reliable cloud infrastructure and hosting." },
+    { "name": "Docker / Kubernetes", "category": "DevOps", "use_case": "Consistent deployments and auto-scaling infrastructure." },
+    { "name": "Figma", "category": "Design", "use_case": "UI/UX design, prototyping, and design systems." },
+    { "name": "Tailwind CSS", "category": "Frontend", "use_case": "Fast, consistent styling for modern web interfaces." }
+  ]
+}

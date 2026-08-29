@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Unity Tech</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="assets/logo/unity-tech-icon.jpg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="admin">
+
+<div id="spotlight"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div class="demo-banner">⚠ Demo prototype with sample data — not connected to a real backend, database, or account system. Anyone with this link can view it.</div>
+
+<div class="portal-shell">
+  <aside class="portal-sidebar">
+    <div class="logo"><span class="logo-badge"><img src="assets/logo/unity-tech-logo.jpg" alt="Unity Tech"></span></div>
+    <nav class="portal-nav">
+      <button class="portal-nav-item active" data-tab="analytics"><span class="ic">📊</span> Analytics</button>
+      <button class="portal-nav-item" data-tab="orders"><span class="ic">🧾</span> Orders</button>
+      <button class="portal-nav-item" data-tab="clients"><span class="ic">👥</span> Clients</button>
+      <button class="portal-nav-item" data-tab="projects"><span class="ic">▣</span> Projects</button>
+      <button class="portal-nav-item" data-tab="employees"><span class="ic">🧑‍💻</span> Employees</button>
+      <button class="portal-nav-item" data-tab="invoices"><span class="ic">▤</span> Invoices</button>
+      <button class="portal-nav-item" data-tab="messages"><span class="ic">✉</span> Messages</button>
+      <button class="portal-nav-item" data-tab="content"><span class="ic">📝</span> Blog &amp; Portfolio</button>
+      <button class="portal-nav-item" data-tab="testimonials"><span class="ic">★</span> Testimonials</button>
+      <button class="portal-nav-item" data-tab="users"><span class="ic">🔐</span> Users &amp; Roles</button>
+      <button class="portal-nav-item" data-tab="settings"><span class="ic">⚙</span> Settings</button>
+    </nav>
+    <a href="index.html" class="portal-exit">← Exit to website</a>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <h1>Admin Overview</h1>
+      <span class="badge badge-blue">Signed in as Admin (demo)</span>
+    </div>
+
+    <!-- Analytics -->
+    <section class="portal-tab active" id="tab-analytics">
+      <div class="portal-grid">
+        <div class="portal-card"><div class="k-icon">💰</div><div class="k-num">Birr 412K</div><div class="k-label">Revenue (this quarter)</div></div>
+        <div class="portal-card"><div class="k-icon">📁</div><div class="k-num">18</div><div class="k-label">Active projects</div></div>
+        <div class="portal-card"><div class="k-icon">👥</div><div class="k-num">54</div><div class="k-label">Total clients</div></div>
+        <div class="portal-card"><div class="k-icon">🧾</div><div class="k-num">7</div><div class="k-label">Unpaid invoices</div></div>
+      </div>
+      <div class="portal-section">
+        <h3>Revenue by month</h3>
+        <div class="bar-chart">
+          <div class="bar" style="height:45%;"><span>Mar</span></div>
+          <div class="bar" style="height:60%;"><span>Apr</span></div>
+          <div class="bar" style="height:52%;"><span>May</span></div>
+          <div class="bar" style="height:78%;"><span>Jun</span></div>
+          <div class="bar" style="height:66%;"><span>Jul</span></div>
+          <div class="bar" style="height:100%;"><span>Aug</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section class="portal-tab" id="tab-orders">
+      <div class="portal-section">
+        <h3>Recent orders / quotes</h3>
+        <table class="portal-table">
+          <thead><tr><th>Order</th><th>Client</th><th>Service</th><th>Value</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>#Q-2041</td><td>Northwind Retail</td><td>Custom Price Builder</td><td>Birr 24,500</td><td><span class="badge badge-yellow">Pending review</span></td></tr>
+            <tr><td>#Q-2039</td><td>Orbit Fitness</td><td>Mobile App</td><td>Birr 15,000</td><td><span class="badge badge-green">Approved</span></td></tr>
+            <tr><td>#Q-2035</td><td>Solace Studio</td><td>Brand Identity</td><td>Birr 8,999</td><td><span class="badge badge-green">Approved</span></td></tr>
+            <tr><td>#Q-2031</td><td>Ledger Finance</td><td>Web Development</td><td>Birr 19,999</td><td><span class="badge badge-red">Declined</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Clients -->
+    <section class="portal-tab" id="tab-clients">
+      <div class="portal-section">
+        <h3>Clients</h3>
+        <table class="portal-table">
+          <thead><tr><th>Client</th><th>Projects</th><th>Total spend</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Northwind Retail</td><td>3</td><td>Birr 62,000</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td>Vantage</td><td>1</td><td>Birr 19,999</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td>Orbit Fitness</td><td>2</td><td>Birr 29,000</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td>Meridian ERP</td><td>1</td><td>Birr 16,999</td><td><span class="badge badge-yellow">On hold</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="portal-tab" id="tab-projects">
+      <div class="portal-section">
+        <h3>All projects</h3>
+        <table class="portal-table">
+          <thead><tr><th>Project</th><th>Client</th><th>Lead</th><th>Status</th><th>Due</th></tr></thead>
+          <tbody>
+            <tr><td>Website Redesign</td><td>Client Company Inc.</td><td>Sara Nasser</td><td><span class="badge badge-blue">In Progress</span></td><td>Aug 20, 2026</td></tr>
+            <tr><td>Mobile App v2</td><td>Orbit Fitness</td><td>David Tran</td><td><span class="badge badge-yellow">In Review</span></td><td>Sep 5, 2026</td></tr>
+            <tr><td>Pulse Analytics</td><td>Northwind Retail</td><td>Lena Moreau</td><td><span class="badge badge-blue">In Progress</span></td><td>Oct 1, 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Employees -->
+    <section class="portal-tab" id="tab-employees">
+      <div class="portal-section">
+        <h3>Team</h3>
+        <table class="portal-table">
+          <thead><tr><th>Name</th><th>Role</th><th>Active projects</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Amir Khalil</td><td>Founder &amp; Creative Director</td><td>4</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td>Sara Nasser</td><td>Lead Product Designer</td><td>3</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td>David Tran</td><td>Engineering Lead</td><td>5</td><td><span class="badge badge-green">Active</span></td></tr>
+            <tr><td>Lena Moreau</td><td>AI &amp; Automation Lead</td><td>2</td><td><span class="badge badge-green">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Invoices -->
+    <section class="portal-tab" id="tab-invoices">
+      <div class="portal-section">
+        <h3>Invoices</h3>
+        <table class="portal-table">
+          <thead><tr><th>Invoice</th><th>Client</th><th>Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>#UT-1042</td><td>Client Company Inc.</td><td>Birr 6,999</td><td><span class="badge badge-yellow">Due Aug 20</span></td></tr>
+            <tr><td>#UT-1038</td><td>Orbit Fitness</td><td>Birr 9,999</td><td><span class="badge badge-green">Paid</span></td></tr>
+            <tr><td>#UT-1029</td><td>Solace Studio</td><td>Birr 2,500</td><td><span class="badge badge-green">Paid</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Messages -->
+    <section class="portal-tab" id="tab-messages">
+      <div class="portal-section">
+        <h3>Client messages</h3>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">Alex Morgan · Client Company Inc.</strong><p class="muted" style="font-size:.85rem;">Can we push the homepage review call to Thursday?</p></div></div>
+        <div class="msg-row"><div class="msg-avatar"></div><div><strong style="font-size:.9rem;">Maya Chen · Northwind Retail</strong><p class="muted" style="font-size:.85rem;">Loved the latest dashboard mockups — approved to proceed.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="portal-tab" id="tab-content">
+      <div class="portal-section">
+        <h3>Blog posts</h3>
+        <table class="portal-table">
+          <thead><tr><th>Title</th><th>Category</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Why Most Agency Websites Fail to Convert</td><td>Web Design</td><td><span class="badge badge-green">Published</span></td></tr>
+            <tr><td>Pricing Your First Client Project</td><td>Business</td><td><span class="badge badge-green">Published</span></td></tr>
+            <tr><td>New AI Feature Deep Dive</td><td>AI</td><td><span class="badge badge-yellow">Draft</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="portal-section">
+        <h3>Portfolio projects</h3>
+        <table class="portal-table">
+          <thead><tr><th>Project</th><th>Category</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Northwind Retail</td><td>Websites</td><td><span class="badge badge-green">Published</span></td></tr>
+            <tr><td>Aperture Reel</td><td>Video Editing</td><td><span class="badge badge-green">Published</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="portal-tab" id="tab-testimonials">
+      <div class="portal-section">
+        <h3>Testimonials</h3>
+        <table class="portal-table">
+          <thead><tr><th>Client</th><th>Rating</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Maya Chen, Northwind Retail</td><td>★★★★★</td><td><span class="badge badge-green">Published</span></td></tr>
+            <tr><td>Ravi Patel, Vantage</td><td>★★★★★</td><td><span class="badge badge-green">Published</span></td></tr>
+            <tr><td>Jonah Ade, Orbit</td><td>★★★★☆</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Users & Roles -->
+    <section class="portal-tab" id="tab-users">
+      <div class="portal-section">
+        <h3>Users &amp; roles</h3>
+        <table class="portal-table">
+          <thead><tr><th>Name</th><th>Role</th><th>Access level</th></tr></thead>
+          <tbody>
+            <tr><td>Amir Khalil</td><td>Owner</td><td><span class="badge badge-blue">Full access</span></td></tr>
+            <tr><td>Sara Nasser</td><td>Design Lead</td><td><span class="badge badge-blue">Projects &amp; Content</span></td></tr>
+            <tr><td>David Tran</td><td>Engineering Lead</td><td><span class="badge badge-blue">Projects &amp; Clients</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="portal-tab" id="tab-settings">
+      <div class="portal-section" style="max-width:480px;">
+        <h3>Workspace settings</h3>
+        <div class="field" style="margin-bottom:1rem;"><input type="text" value="Unity Tech"></div>
+        <div class="field" style="margin-bottom:1rem;"><input type="email" value="hello@unitytech.io"></div>
+        <div class="field" style="margin-bottom:1.2rem;"><input type="text" value="Birr (ETB)"></div>
+        <button class="btn btn-primary" type="button">Save changes</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/app.js" defer></script>
+<script>
+  (function(){
+    const tabs = document.querySelectorAll('.portal-nav-item');
+    const panels = document.querySelectorAll('.portal-tab');
+    tabs.forEach(tab=>{
+      tab.addEventListener('click', ()=>{
+        tabs.forEach(t=>t.classList.remove('active'));
+        panels.forEach(p=>p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+  })();
+</script>
+</body>
+</html>
