@@ -639,4 +639,114 @@
       e.target.reset();
     });
   }
+
+  // ---------- Contact Us page form (live Formspree submission) ----------
+  const contactPageForm = document.getElementById('contactPageForm');
+  if(contactPageForm){
+    const submitBtn = contactPageForm.querySelector('button[type="submit"]');
+    const submitBtnDefaultLabel = submitBtn ? submitBtn.textContent : '';
+    const statusEl = document.getElementById('formNote');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const fields = {
+      name:    { el: contactPageForm.querySelector('[name="name"]'),    errorEl: document.getElementById('nameError') },
+      email:   { el: contactPageForm.querySelector('[name="email"]'),   errorEl: document.getElementById('emailError') },
+      service: { el: contactPageForm.querySelector('[name="service"]'), errorEl: document.getElementById('serviceError') },
+      message: { el: contactPageForm.querySelector('[name="message"]'), errorEl: document.getElementById('messageError') }
+    };
+
+    function setFieldError(field, message){
+      if(!field || !field.el) return;
+      field.el.classList.toggle('input-invalid', !!message);
+      if(field.errorEl) field.errorEl.textContent = message || '';
+    }
+
+    function setStatus(message, type){
+      if(!statusEl) return;
+      statusEl.textContent = message || '';
+      statusEl.classList.remove('form-status-success', 'form-status-error');
+      if(type) statusEl.classList.add(type === 'success' ? 'form-status-success' : 'form-status-error');
+    }
+
+    function validate(){
+      let valid = true;
+
+      if(!fields.name.el.value.trim()){
+        setFieldError(fields.name, 'Please enter your name.');
+        valid = false;
+      } else {
+        setFieldError(fields.name, '');
+      }
+
+      const emailVal = fields.email.el.value.trim();
+      if(!emailVal || !emailPattern.test(emailVal)){
+        setFieldError(fields.email, 'Please enter a valid email address.');
+        valid = false;
+      } else {
+        setFieldError(fields.email, '');
+      }
+
+      if(fields.service.el){
+        if(!fields.service.el.value){
+          setFieldError(fields.service, 'Please select what you need help with.');
+          valid = false;
+        } else {
+          setFieldError(fields.service, '');
+        }
+      }
+
+      const messageVal = fields.message.el.value.trim();
+      if(!messageVal || messageVal.length < 10){
+        setFieldError(fields.message, 'Please enter your message.');
+        valid = false;
+      } else {
+        setFieldError(fields.message, '');
+      }
+
+      return valid;
+    }
+
+    let isSubmitting = false;
+
+    contactPageForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(isSubmitting) return;
+
+      setStatus('');
+
+      if(!validate()){
+        setStatus('Please fix the highlighted fields and try again.', 'error');
+        return;
+      }
+
+      isSubmitting = true;
+      if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+      const subjectField = contactPageForm.querySelector('[name="_subject"]');
+      if(subjectField){
+        const serviceVal = fields.service.el ? fields.service.el.value : '';
+        subjectField.value = 'New contact form submission — ' + (serviceVal || 'Unity Tech website');
+      }
+
+      const formData = new FormData(contactPageForm);
+
+      fetch(contactPageForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then((response)=>{
+        if(response.ok){
+          setStatus("Message Sent Successfully — Thank you for contacting Unity Tech. Your message has been received. We'll get back to you as soon as possible.", 'success');
+          contactPageForm.reset();
+        } else {
+          throw new Error('Formspree responded with an error status');
+        }
+      }).catch(()=>{
+        setStatus("Something went wrong — we couldn't send your message right now. Please try again or contact us directly.", 'error');
+      }).finally(()=>{
+        isSubmitting = false;
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = submitBtnDefaultLabel; }
+      });
+    });
+  }
 })();

@@ -111,23 +111,41 @@
 <section class="section-pad" id="contact" style="padding-top:0;">
   <div class="container">
     <div class="contact-grid">
-      <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/xwlkvgeb">
-        <div class="field"><input type="text" placeholder="Full name" required></div>
-        <div class="field"><input type="email" placeholder="Email address" required></div>
-        <div class="field"><input type="text" placeholder="Company (optional)"></div>
+      <form class="contact-form reveal" id="contactPageForm" action="https://formspree.io/f/xwlkvgeb" novalidate>
+        <input type="hidden" name="_subject" value="New contact form submission — Unity Tech website">
         <div class="field">
-          <select style="width:100%; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem 1.1rem; color:#fff; font-family:var(--body); font-size:.92rem;">
-            <option>What do you need help with?</option>
-            <option>Web Development</option>
-            <option>Mobile App</option>
-            <option>AI Solution</option>
-            <option>Video Editing / Design</option>
-            <option>Something else</option>
-          </select>
+          <label class="sr-only" for="contactName">Full name</label>
+          <input type="text" id="contactName" name="name" placeholder="Full name" required>
+          <span class="field-error" id="nameError" aria-live="polite"></span>
         </div>
-        <div class="field"><textarea placeholder="Tell us about your project" required></textarea></div>
+        <div class="field">
+          <label class="sr-only" for="contactEmail">Email address</label>
+          <input type="email" id="contactEmail" name="email" placeholder="Email address" required>
+          <span class="field-error" id="emailError" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label class="sr-only" for="contactCompany">Company (optional)</label>
+          <input type="text" id="contactCompany" name="company" placeholder="Company (optional)">
+        </div>
+        <div class="field">
+          <label class="sr-only" for="contactService">What do you need help with?</label>
+          <select id="contactService" name="service" style="width:100%; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem 1.1rem; color:#fff; font-family:var(--body); font-size:.92rem;" required>
+            <option value="">What do you need help with?</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Mobile App">Mobile App</option>
+            <option value="AI Solution">AI Solution</option>
+            <option value="Video Editing / Design">Video Editing / Design</option>
+            <option value="Something else">Something else</option>
+          </select>
+          <span class="field-error" id="serviceError" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label class="sr-only" for="contactMessage">Tell us about your project</label>
+          <textarea id="contactMessage" name="message" placeholder="Tell us about your project" required></textarea>
+          <span class="field-error" id="messageError" aria-live="polite"></span>
+        </div>
         <button type="submit" class="btn btn-primary magnetic" style="justify-content:center;">Send Message →</button>
-        <p class="muted" id="formNote" style="font-size:.82rem; min-height:1.2rem;"></p>
+        <p class="muted" id="formNote" role="status" aria-live="polite" style="font-size:.82rem; min-height:1.2rem;"></p>
       </form>
       <div class="reveal" style="transition-delay:.1s">
         <div class="contact-side">

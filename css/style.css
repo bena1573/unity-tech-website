@@ -11,6 +11,7 @@
     --text:#FFFFFF;
     --muted:#94A3B8;
     --success:#22C55E;
+    --danger:#F87171;
     --display: 'Space Grotesk', sans-serif;
     --ui: 'Plus Jakarta Sans', sans-serif;
     --body: 'Inter', sans-serif;
@@ -444,6 +445,12 @@
   }
   .field input:focus, .field textarea:focus{ outline:none; border-color:var(--accent-2); box-shadow:0 0 0 4px rgba(56,189,248,.12); }
   .field textarea{ resize:vertical; min-height:120px; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .field-error{ display:block; min-height:1.1rem; color:var(--danger); font-size:.78rem; margin-top:.35rem; }
+  .input-invalid{ border-color:var(--danger) !important; }
+  .btn:disabled{ opacity:.6; cursor:not-allowed; box-shadow:none; }
+  #formNote.form-status-success{ color:var(--success); }
+  #formNote.form-status-error{ color:var(--danger); }
   .contact-side{ background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2rem; }
   .contact-row{ display:flex; gap:1rem; align-items:flex-start; padding:1rem 0; border-bottom:1px solid rgba(255,255,255,.06); }
   .contact-row:last-child{ border-bottom:none; }
