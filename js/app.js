@@ -69,7 +69,6 @@
     document.body.style.overflow = 'hidden';
     skip.addEventListener('click', finish);
 
-    // Story beats
     timers.push(setTimeout(()=>{ blob.classList.add('on'); }, 150));
     timers.push(setTimeout(()=>{ laptopWrap.classList.add('in'); }, 1150));
     timers.push(setTimeout(()=>{ logoWrap.classList.add('fade-out'); }, 1150));
@@ -624,15 +623,15 @@
     });
   });
 
-  // ---------- Contact Us page form (live Formspree submission using iframe) ----------
+  // ---------- Contact Us page form (Formspree submission) ----------
   const contactPageForm = document.getElementById('contactPageForm');
   if(contactPageForm){
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwlkvgeb';
     const submitBtn = contactPageForm.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message →';
     const formMessage = document.getElementById('formMessage');
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Get form fields
     const fields = {
       name: contactPageForm.querySelector('[name="name"]'),
       email: contactPageForm.querySelector('[name="email"]'),
@@ -640,7 +639,6 @@
       message: contactPageForm.querySelector('[name="message"]')
     };
 
-    // Error elements
     const errorElements = {
       name: document.getElementById('nameError'),
       email: document.getElementById('emailError'),
@@ -698,54 +696,54 @@
       return isValid;
     }
 
-    // Handle form submission using iframe method (works with free Formspree plan)
-    contactPageForm.addEventListener('submit', function(e) {
+    contactPageForm.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      // Clear previous messages
+      if (contactPageForm.dataset.submitting === 'true') {
+        console.log('Form already submitting...');
+        return;
+      }
+
       showFormMessage('');
 
-      // Validate form
       if (!validateForm()) {
         showFormMessage('Please fix the highlighted fields and try again.', 'error');
         return;
       }
 
-      // Set the subject with service
-      const subjectField = contactPageForm.querySelector('[name="_subject"]');
-      if (subjectField) {
-        const serviceVal = fields.service.value || 'General Inquiry';
-        subjectField.value = `New contact form submission — ${serviceVal}`;
-      }
+      try {
+        contactPageForm.dataset.submitting = 'true';
+        if (submitBtn) {
+          submitBtn.innerHTML = 'Sending...';
+          submitBtn.disabled = true;
+        }
 
-      // Show sending state
-      if (submitBtn) {
-        submitBtn.innerHTML = 'Sending...';
-        submitBtn.disabled = true;
-      }
+        const formData = new FormData(contactPageForm);
+        const serviceName = fields.service.value || 'General Inquiry';
+        formData.set('_subject', `New contact form submission — ${serviceName}`);
 
-      // Create a hidden iframe for form submission
-      const iframe = document.createElement('iframe');
-      iframe.name = 'hidden-form-submit-' + Date.now();
-      iframe.style.position = 'absolute';
-      iframe.style.width = '0';
-      iframe.style.height = '0';
-      iframe.style.border = '0';
-      iframe.style.visibility = 'hidden';
-      document.body.appendChild(iframe);
+        console.log('Sending to Formspree:', FORMSPREE_ENDPOINT);
 
-      // Set form target to iframe
-      contactPageForm.target = iframe.name;
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
 
-      // Submit the form
-      contactPageForm.submit();
+        console.log('Response status:', response.status);
 
-      // Check if submission was successful via iframe onload
-      let iframeLoaded = false;
-      iframe.onload = function() {
-        if (!iframeLoaded) {
-          iframeLoaded = true;
-          // Success - show message and reset form
+        let responseData;
+        try {
+          responseData = await response.json();
+          console.log('Response data:', responseData);
+        } catch (e) {
+          console.error('Failed to parse response:', e);
+          responseData = { error: 'Invalid response from server' };
+        }
+
+        if (response.ok) {
           showFormMessage('Thanks — we\'ll be in touch within one business day.', 'success');
           contactPageForm.reset();
           if (submitBtn) {
@@ -755,37 +753,34 @@
               submitBtn.disabled = false;
             }, 3000);
           }
-          // Remove iframe
-          setTimeout(() => {
-            if (iframe.parentNode) document.body.removeChild(iframe);
-          }, 1000);
-        }
-      };
-
-      // Fallback: if iframe doesn't load, show success after 5 seconds
-      setTimeout(function() {
-        if (!iframeLoaded && submitBtn && submitBtn.disabled) {
-          iframeLoaded = true;
-          showFormMessage('Thanks — we\'ll be in touch within one business day.', 'success');
-          contactPageForm.reset();
+        } else {
+          const errorMsg = responseData.error || `Server error: ${response.status}`;
+          console.error('Formspree error:', errorMsg);
+          showFormMessage(
+            'Something went wrong — we couldn\'t send your message right now. Please try again or contact us directly.',
+            'error'
+          );
           if (submitBtn) {
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
           }
-          // Remove iframe
-          setTimeout(() => {
-            if (iframe.parentNode) document.body.removeChild(iframe);
-          }, 1000);
         }
-      }, 5000);
 
-      // Reset form target after submission
-      setTimeout(() => {
-        contactPageForm.target = '';
-      }, 100);
+      } catch (error) {
+        console.error('Network error:', error);
+        showFormMessage(
+          'Connection error — please check your internet and try again.',
+          'error'
+        );
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      } finally {
+        contactPageForm.dataset.submitting = 'false';
+      }
     });
 
-    // Real-time validation feedback
     Object.values(fields).forEach(field => {
       if (!field) return;
       field.addEventListener('blur', () => {
