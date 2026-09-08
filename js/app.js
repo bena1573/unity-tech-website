@@ -1,4 +1,3 @@
-
 (function(){
   // ---------- Nav active state (per page) ----------
   const path = (location.pathname.split('/').pop() || 'index.html');
@@ -630,122 +629,213 @@
     });
   });
 
-  // ---------- Contact form ----------
-  const contactForm = document.getElementById('contactForm');
-  if(contactForm){
-    contactForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      document.getElementById('formNote').textContent = "Thanks — we'll be in touch within one business day.";
-      e.target.reset();
-    });
-  }
-
   // ---------- Contact Us page form (live Formspree submission) ----------
   const contactPageForm = document.getElementById('contactPageForm');
   if(contactPageForm){
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwlkvgeb';
     const submitBtn = contactPageForm.querySelector('button[type="submit"]');
-    const submitBtnDefaultLabel = submitBtn ? submitBtn.textContent : '';
-    const statusEl = document.getElementById('formNote');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message →';
+    const formMessage = document.getElementById('formMessage');
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    // Get form fields
     const fields = {
-      name:    { el: contactPageForm.querySelector('[name="name"]'),    errorEl: document.getElementById('nameError') },
-      email:   { el: contactPageForm.querySelector('[name="email"]'),   errorEl: document.getElementById('emailError') },
-      service: { el: contactPageForm.querySelector('[name="service"]'), errorEl: document.getElementById('serviceError') },
-      message: { el: contactPageForm.querySelector('[name="message"]'), errorEl: document.getElementById('messageError') }
+      name: contactPageForm.querySelector('[name="name"]'),
+      email: contactPageForm.querySelector('[name="email"]'),
+      service: contactPageForm.querySelector('[name="service"]'),
+      message: contactPageForm.querySelector('[name="message"]')
     };
 
-    function setFieldError(field, message){
-      if(!field || !field.el) return;
-      field.el.classList.toggle('input-invalid', !!message);
-      if(field.errorEl) field.errorEl.textContent = message || '';
+    // Error elements
+    const errorElements = {
+      name: document.getElementById('nameError'),
+      email: document.getElementById('emailError'),
+      service: document.getElementById('serviceError'),
+      message: document.getElementById('messageError')
+    };
+
+    function setFieldError(field, message) {
+      if (!field) return;
+      field.classList.toggle('input-invalid', !!message);
+      const errorEl = errorElements[field.getAttribute('name')];
+      if (errorEl) errorEl.textContent = message || '';
     }
 
-    function setStatus(message, type){
-      if(!statusEl) return;
-      statusEl.textContent = message || '';
-      statusEl.classList.remove('form-status-success', 'form-status-error');
-      if(type) statusEl.classList.add(type === 'success' ? 'form-status-success' : 'form-status-error');
+    function showFormMessage(message, type) {
+      if (!formMessage) return;
+      formMessage.textContent = message || '';
+      formMessage.className = 'form-message ' + (type || '');
+      formMessage.style.display = message ? 'block' : 'none';
     }
 
-    function validate(){
-      let valid = true;
+    function validateForm() {
+      let isValid = true;
 
-      if(!fields.name.el.value.trim()){
+      // Name validation
+      if (!fields.name.value.trim()) {
         setFieldError(fields.name, 'Please enter your name.');
-        valid = false;
+        isValid = false;
       } else {
         setFieldError(fields.name, '');
       }
 
-      const emailVal = fields.email.el.value.trim();
-      if(!emailVal || !emailPattern.test(emailVal)){
+      // Email validation
+      const emailVal = fields.email.value.trim();
+      if (!emailVal || !emailPattern.test(emailVal)) {
         setFieldError(fields.email, 'Please enter a valid email address.');
-        valid = false;
+        isValid = false;
       } else {
         setFieldError(fields.email, '');
       }
 
-      if(fields.service.el){
-        if(!fields.service.el.value){
-          setFieldError(fields.service, 'Please select what you need help with.');
-          valid = false;
-        } else {
-          setFieldError(fields.service, '');
-        }
+      // Service validation
+      if (!fields.service.value) {
+        setFieldError(fields.service, 'Please select a service.');
+        isValid = false;
+      } else {
+        setFieldError(fields.service, '');
       }
 
-      const messageVal = fields.message.el.value.trim();
-      if(!messageVal || messageVal.length < 10){
-        setFieldError(fields.message, 'Please enter your message.');
-        valid = false;
+      // Message validation (min 10 chars)
+      const messageVal = fields.message.value.trim();
+      if (!messageVal || messageVal.length < 10) {
+        setFieldError(fields.message, 'Please enter at least 10 characters.');
+        isValid = false;
       } else {
         setFieldError(fields.message, '');
       }
 
-      return valid;
+      return isValid;
     }
 
-    let isSubmitting = false;
-
-    contactPageForm.addEventListener('submit', (e)=>{
+    // Handle form submission
+    contactPageForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      if(isSubmitting) return;
 
-      setStatus('');
-
-      if(!validate()){
-        setStatus('Please fix the highlighted fields and try again.', 'error');
+      // Prevent duplicate submissions
+      if (contactPageForm.dataset.submitting === 'true') {
+        console.log('Form already submitting...');
         return;
       }
 
-      isSubmitting = true;
-      if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+      // Clear previous messages
+      showFormMessage('');
 
-      const subjectField = contactPageForm.querySelector('[name="_subject"]');
-      if(subjectField){
-        const serviceVal = fields.service.el ? fields.service.el.value : '';
-        subjectField.value = 'New contact form submission — ' + (serviceVal || 'Unity Tech website');
+      // Validate form
+      if (!validateForm()) {
+        showFormMessage('Please fix the highlighted fields and try again.', 'error');
+        return;
       }
 
-      const formData = new FormData(contactPageForm);
-
-      fetch(contactPageForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      }).then((response)=>{
-        if(response.ok){
-          setStatus("Message Sent Successfully — Thank you for contacting Unity Tech. Your message has been received. We'll get back to you as soon as possible.", 'success');
-          contactPageForm.reset();
-        } else {
-          throw new Error('Formspree responded with an error status');
+      try {
+        // Set submitting state
+        contactPageForm.dataset.submitting = 'true';
+        if (submitBtn) {
+          submitBtn.innerHTML = 'Sending...';
+          submitBtn.disabled = true;
         }
-      }).catch(()=>{
-        setStatus("Something went wrong — we couldn't send your message right now. Please try again or contact us directly.", 'error');
-      }).finally(()=>{
-        isSubmitting = false;
-        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = submitBtnDefaultLabel; }
+
+        // Create FormData
+        const formData = new FormData(contactPageForm);
+
+        // Set dynamic subject with service
+        const serviceName = fields.service.value || 'General Inquiry';
+        formData.set('_subject', `New contact form submission — ${serviceName}`);
+
+        // Add timestamp for debugging
+        formData.set('_timestamp', new Date().toISOString());
+
+        // Send to Formspree
+        console.log('Sending to Formspree:', FORMSPREE_ENDPOINT);
+
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        console.log('Response status:', response.status);
+
+        // Parse response
+        let responseData;
+        try {
+          responseData = await response.json();
+          console.log('Response data:', responseData);
+        } catch (e) {
+          console.error('Failed to parse response:', e);
+          responseData = { error: 'Invalid response from server' };
+        }
+
+        if (response.ok) {
+          // Success
+          showFormMessage('Thanks — we\'ll be in touch within one business day.', 'success');
+          contactPageForm.reset();
+          if (submitBtn) {
+            submitBtn.innerHTML = '✓ Sent!';
+          }
+          // Reset button text after 3 seconds
+          setTimeout(() => {
+            if (submitBtn) {
+              submitBtn.innerHTML = originalBtnText;
+              submitBtn.disabled = false;
+            }
+          }, 3000);
+        } else {
+          // Server error
+          const errorMsg = responseData.error || `Server error: ${response.status}`;
+          console.error('Formspree error:', errorMsg);
+          showFormMessage(
+            'Something went wrong — we couldn\'t send your message right now. Please try again or contact us directly.',
+            'error'
+          );
+          if (submitBtn) {
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+          }
+        }
+
+      } catch (error) {
+        // Network error
+        console.error('Network error:', error);
+        showFormMessage(
+          'Connection error — please check your internet and try again.',
+          'error'
+        );
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      } finally {
+        contactPageForm.dataset.submitting = 'false';
+      }
+    });
+
+    // Real-time validation feedback
+    Object.values(fields).forEach(field => {
+      if (!field) return;
+      field.addEventListener('blur', () => {
+        // Clear error when field is filled
+        if (field.value.trim()) {
+          setFieldError(field, '');
+        }
+      });
+      field.addEventListener('input', () => {
+        // For email, validate on input
+        if (field.name === 'email') {
+          const emailVal = field.value.trim();
+          if (emailVal && emailPattern.test(emailVal)) {
+            setFieldError(field, '');
+          }
+        }
+        // For message, check length
+        if (field.name === 'message') {
+          const msgVal = field.value.trim();
+          if (msgVal.length >= 10) {
+            setFieldError(field, '');
+          }
+        }
       });
     });
   }
