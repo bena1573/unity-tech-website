@@ -111,8 +111,12 @@
 <section class="section-pad" id="contact" style="padding-top:0;">
   <div class="container">
     <div class="contact-grid">
-      <form class="contact-form reveal" id="contactPageForm" action="https://formspree.io/f/xwlkvgeb" novalidate>
+      <!-- IMPORTANT: Removed action attribute and added id="contactPageForm" -->
+      <form class="contact-form reveal" id="contactPageForm" novalidate>
         <input type="hidden" name="_subject" value="New contact form submission — Unity Tech website">
+        <!-- Added captcha disable to prevent issues -->
+        <input type="hidden" name="_captcha" value="false">
+        
         <div class="field">
           <label class="sr-only" for="contactName">Full name</label>
           <input type="text" id="contactName" name="name" placeholder="Full name" required>
@@ -141,9 +145,13 @@
         </div>
         <div class="field">
           <label class="sr-only" for="contactMessage">Tell us about your project</label>
-          <textarea id="contactMessage" name="message" placeholder="Tell us about your project" required></textarea>
+          <textarea id="contactMessage" name="message" placeholder="Tell us about your project (minimum 10 characters)" required></textarea>
           <span class="field-error" id="messageError" aria-live="polite"></span>
         </div>
+        
+        <!-- Message display area for form feedback -->
+        <div id="formMessage" class="form-message" style="display:none;"></div>
+        
         <button type="submit" class="btn btn-primary magnetic" style="justify-content:center;">Send Message →</button>
         <p class="muted" id="formNote" role="status" aria-live="polite" style="font-size:.82rem; min-height:1.2rem;"></p>
       </form>
